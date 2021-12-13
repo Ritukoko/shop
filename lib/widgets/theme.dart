@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class MyTheme{
  static ThemeData lightTheme(BuildContext context)=>ThemeData(
-    appBarTheme: AppBarTheme(
+
+   appBarTheme: AppBarTheme(
         color: Colors.white,
         titleTextStyle: TextStyle(
             color: Colors.black,
@@ -16,4 +17,7 @@ class MyTheme{
     brightness: Brightness.dark,
   );
 
+ static Color bluish=Color(0xFF33FFF4 );
+ static Color darkblue=Color(0xff338BFF);
 }
+
