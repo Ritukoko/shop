@@ -6,6 +6,8 @@ import 'package:untitled/widgets/drawer.dart';
 import 'package:untitled/widgets/theme.dart';
 import 'package:untitled/widgets/itemWidget.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:untitled/pages/homeWidgets/catalogHeader.dart';
+import 'package:untitled/pages/homeWidgets/catalogList.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -56,33 +58,6 @@ class _HomePageState extends State<HomePage> {
         ),
     drawer:MyDrawer()
       ,);
-  }
-}
-
-class CatalogHeader extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        "Catalog App".text.xl5.bold.color(MyTheme.bluish).make(),
-        "Trending products".text.xl2.make(),
-      ],
-    );
-  }
-}
-
-class CatalogList extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      shrinkWrap: true,
-      itemCount: Model.items.length,
-      itemBuilder: (context, index) {
-        final catalog = Model.items[index];
-        return CatalogItem(catalog: catalog);
-      },
-    );
   }
 }
 

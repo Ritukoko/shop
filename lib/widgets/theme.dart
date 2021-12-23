@@ -17,7 +17,7 @@ class MyTheme{
     brightness: Brightness.dark,
   );
 
- static Color bluish=Color(0xFF33FFF4 );
- static Color darkblue=Color(0xff338BFF);
+ static Color bluish=Color(0xffdfaee8);
+ static Color darkblue=Color(0xffd5c0ee);
 }
 
