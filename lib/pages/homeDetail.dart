@@ -11,22 +11,41 @@ class homeDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text("Product"),
+      ),
+      backgroundColor: context.canvasColor,
       body: SafeArea(
         bottom: false,
         child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.black12)
+            Expanded(
+              child: Hero(
+                tag: catalog,
+                    child: Image.network(catalog.image)
+              ),
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: VxArc(height: 30,
+                  arcType: VxArcType.CONVEY,
+                  edge: VxEdge.TOP,
+                  child: Container(
+                   // padding: EdgeInsets.only(left: 10,right: 10),
+                    padding: EdgeInsets.only(top: 35),
+                    width: MediaQuery.of(context).size.width,
+                    color: Colors.black12,
+                    //child: Center(child: catalog.name.text.color(Colors.white).make()),
+ //                   child:  Text("${catalog.name}",
+    //                textAlign: TextAlign.center,),
+                    child: catalog.name.text.xl.center.make(),
+
+                  ),
                 ),
-                alignment:Alignment.center,
-                //Alignment.bottomCenter,
-                child: Padding(
-                  padding: const EdgeInsets.all(60.0),
-                  child: Image.network(catalog.image),
-                )
-            )
+              ),
+            ),
           ],
         ).p20(),
       ),

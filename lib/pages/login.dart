@@ -53,6 +53,7 @@ movetohome(BuildContext context) async {
     return Scaffold(
       appBar: AppBar(
         title: Text("kaya"),
+        centerTitle: true,
       ),
       body: Center(
         child: SingleChildScrollView(

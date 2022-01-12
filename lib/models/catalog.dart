@@ -1,8 +1,20 @@
 
 import 'dart:convert';
 
+//import 'dart:ffi';
+
 class Model{
-  static late List<Item> items;
+
+  static final catModel= Model._internal();
+  Model._internal();
+  factory Model()=> catModel;
+
+  static List<Item> items=[];
+
+ Item getbyId(int id)=>
+      items.firstWhere((element) => element.id==id,orElse: null);
+
+ static Item getbyPosition(int pos)=>items[pos];
 }
 
 class Item{

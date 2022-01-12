@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:untitled/models/cartmodel.dart';
 import 'dart:convert';
 import 'package:untitled/models/catalog.dart';
+import 'package:untitled/utils/routes.dart';
 import 'package:untitled/widgets/drawer.dart';
 import 'package:untitled/widgets/theme.dart';
 import 'package:untitled/widgets/itemWidget.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:untitled/pages/homeWidgets/catalogHeader.dart';
 import 'package:untitled/pages/homeWidgets/catalogList.dart';
+import 'package:untitled/pages/cart.dart';
+import 'package:untitled/pages/homeWidgets/add_tocart.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -15,9 +19,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final int days = 30;
-
-  final String name = "Codepur";
 
   @override
   void initState() {
@@ -40,11 +41,11 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: MyTheme.darkblue,
+        backgroundColor: context.cardColor,
         body: Container(
           padding: Vx.m32,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               CatalogHeader(),
               if (Model.items != null && Model.items.isNotEmpty)
@@ -57,7 +58,12 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
     drawer:MyDrawer()
-      ,);
+      ,
+    floatingActionButton: FloatingActionButton(
+      onPressed: ()=>Navigator.pushNamed(context, MyRoutes.cartroute),
+      backgroundColor: Colors.pinkAccent[200],
+      child: Icon(Icons.shopping_cart),
+    ),);
   }
 }
 
@@ -81,7 +87,7 @@ class CatalogItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  catalog.name.text.lg.color(MyTheme.bluish).bold.make(),
+                  catalog.name.text.lg.color(context.accentColor).bold.make(),
                   catalog.desc.text.textStyle(context.captionStyle).make(),
                   10.heightBox,
                   ButtonBar(
@@ -89,26 +95,18 @@ class CatalogItem extends StatelessWidget {
                     buttonPadding: EdgeInsets.zero,
                     children: [
                       "\$${catalog.price}".text.bold.xl.make(),
-                      ElevatedButton(
-                        onPressed: () {},
-                        style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(
-                              MyTheme.bluish,
-                            ),
-                            shape: MaterialStateProperty.all(
-                              StadiumBorder(),
-                            )),
-                        child: "Buy".text.make(),
-                      )
-                    ],
+                      addtocart(catalog:catalog)
+                ],
                   ).pOnly(right: 8.0)
                 ],
               ))
         ],
       ),
-    ).white.rounded.square(150).make().py16();
+    ).color(context.canvasColor).rounded.square(150).make().py16();
   }
 }
+
+
 
 class CatalogImage extends StatelessWidget {
   final String image;
@@ -118,6 +116,6 @@ class CatalogImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Image.network(
       image,
-    ).box.rounded.p8.color(MyTheme.darkblue).make().p16().w40(context);
+    ).box.rounded.p8.color(context.cardColor).make().p16().w40(context);
   }
 }
